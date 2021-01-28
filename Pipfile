@@ -1,0 +1,25 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+scrapy = "*"
+python-decouple = "*"
+bpython = "*"
+ipython = "*"
+ipykernel = "*"
+openpyxl = "*"
+pymongo = "*"
+pandas = "*"
+
+[requires]
+python_version = "3.8"
+
+[scripts]
+imdb="scrapy crawl Imdb"
+crewunited="scrapy crawl CrewUnited"
+imdbfinder="scrapy crawl ImdbEmptyFinder"
+cufinder="scrapy crawl CrewUnitetEmptyFinder"
