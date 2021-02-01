@@ -5,15 +5,15 @@ import re
 from pymongo import MongoClient
 
 db = MongoClient()
-stations = db.stations_new
+stations = db.remaining
 logs_doc = stations.logs
-db['stations_new']['logs'].update_many(
+db['remaining']['logs'].update_many(
     {},
     {
         "$set":{"crew_united_found":0}
     }
 )
-empties=db['stations_new']['empties']
+empties=db['remaining']['empties']
 
 
 class ImdbemptyfinderSpider(scrapy.Spider):

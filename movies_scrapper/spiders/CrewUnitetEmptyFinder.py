@@ -4,9 +4,9 @@ import scrapy
 from pymongo import MongoClient
 
 db = MongoClient()
-stations = db.stations_new
+stations = db.remaining
 logs_doc = stations.logs
-db['stations_new']['logs'].update_many(
+db['remaining']['logs'].update_many(
     {},
     {
         "$set": {"crew_united_found": 0}
@@ -69,7 +69,7 @@ default_payload = [
 ]
 headers = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.97 Safari/537.36"}
-empties = db['stations_new']['empties']
+empties = db['remaining']['empties']
 
 
 class CrewunitetemptyfinderSpider(scrapy.Spider):
