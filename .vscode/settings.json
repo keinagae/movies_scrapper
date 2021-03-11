@@ -1,3 +1,4 @@
 {
-    "jupyter.jupyterServerType": "local"
+    "jupyter.jupyterServerType": "local",
+    "python.pythonPath": "d:\\Installs\\python virtual_envs\\movies_scrapper-0G-9HH9F\\Scripts\\python.exe"
 }
