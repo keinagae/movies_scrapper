@@ -43,3 +43,9 @@ class ImdbId:
     year:List[dict]=field(default_factory=list)
     title_accuracy:int=0
     aka_accuracy:int=0
+    
+@dataclass
+class ImdbCompanies:
+    id:str
+    productions:List[str]=field(default_factory=list)
+    distributors:List[str]=field(default_factory=list)

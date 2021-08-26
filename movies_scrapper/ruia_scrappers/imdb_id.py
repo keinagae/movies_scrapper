@@ -1,12 +1,10 @@
 import re
 import urllib
+import json
+from ruia import Request,Spider,Response,Item,TextField,ElementField
 
-from lxml.etree import Element
-from pymongo import MongoClient
-from ruia import Request,Spider,Response
-
-db = MongoClient()
-imdb = db.imfb
+class ImdbItem(Item):
+    productions=TextField(css_select='#production')
 
 class AsyncIterator:
     def __init__(self, seq):
@@ -25,16 +23,18 @@ class IMDBIdSpider(Spider):
     start_urls = [f'https://www.imdb.com/', ]
 
     async def parse(self, response: Response):
-        async for show in AsyncIterator(list(imdb.imdb.find({}))):
-            print(show)
-            params = {'q': show['Title'], "ref_": "nv_sr_sm", 's': 'tt'}
-            response = await Request(
-                url='https://www.imdb.com/find?'
-                +urllib.parse.urlencode(params)
-            ).fetch()
-            yield self.paser_search(response, show)
+        with open('ids.json',mode='r') as json_file:
+            json_data=json.loads(json_file.read())['data']
+        async for show_id in AsyncIterator(json_data[:10]):
+            yield Request(
+                url=f'https://www.imdb.com/title/{show_id}/companycredits?ref_=tt_dt_co',
+                callback=self.parse_companies
+            )
 
-    async def paser_search(self,response:Response):
+    async def parse_companies(self,response:Response):
+        print("heeeee")
+        item:ImdbItem = await ImdbItem.get_item(html=await response.text())
+        print(item.productions)
 
 if __name__ == '__main__':
     IMDBIdSpider.start()

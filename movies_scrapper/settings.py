@@ -67,7 +67,7 @@ COOKIES_ENABLED = True
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
    # 'movies_scrapper.pipelines.MoviesScrapperPipeline': 300,
-   'movies_scrapper.pipelines.IMDBIdScrapperPipeline': 300,
+   # 'movies_scrapper.pipelines.IMDBIdScrapperPipeline': 300,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
